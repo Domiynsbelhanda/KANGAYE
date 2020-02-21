@@ -6,33 +6,29 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Accueil" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Profil" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_alert"
+            android:icon="@drawable/alerte_black"
+            android:title="Alertes" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
-    </group>
+            android:id="@+id/nav_sos"
+            android:icon="@drawable/sos_black"
+            android:title="S.O.S" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_call_black_24dp"
+            android:title="Vos Contacts" />
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/nav_carte"
+            android:icon="@drawable/ic_navigation_black_24dp"
+            android:title="Carte MAP's" />
+    </group>
 
 </menu>
