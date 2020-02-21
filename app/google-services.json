@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "428401900623",
+    "firebase_url": "https://kanga-ye.firebaseio.com",
+    "project_id": "kanga-ye",
+    "storage_bucket": "kanga-ye.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428401900623:android:25d4da4fe98590a4ef3e3a",
+        "android_client_info": {
+          "package_name": "cd.belhanda.kangaye"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428401900623-n5jhlscm7tevdsees25eho549tmmj53m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cd.belhanda.kangaye",
+            "certificate_hash": "71134c1057a86503f325a353e6f97bf72119d072"
+          }
+        },
+        {
+          "client_id": "428401900623-urm83sf31eqg7bi5cjuekdk2jtc0njtu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKBFqA_wVg8gpCSIHZ5Any9mAiE0jvtwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428401900623-urm83sf31eqg7bi5cjuekdk2jtc0njtu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

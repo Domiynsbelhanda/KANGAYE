@@ -1,0 +1,19 @@
+package cd.belhanda.kangaye.ui.carte;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+public class CarteViewModel extends ViewModel {
+
+    private MutableLiveData<String> mText;
+
+    public CarteViewModel() {
+        mText = new MutableLiveData<>();
+        mText.setValue("This is home fragment");
+    }
+
+    public LiveData<String> getText() {
+        return mText;
+    }
+}
