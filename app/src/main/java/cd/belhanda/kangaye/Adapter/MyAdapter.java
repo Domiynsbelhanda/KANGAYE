@@ -1,5 +1,6 @@
 package cd.belhanda.kangaye.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
@@ -9,33 +10,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import cd.belhanda.kangaye.Modele.Contact;
 import cd.belhanda.kangaye.Modele.Inscription_Modele;
 import cd.belhanda.kangaye.R;
-import cd.belhanda.kangaye.ui.contact.ContactFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RecyclerVH> {
 
     Context c;
     ArrayList<Inscription_Modele> mList;
-    String key, nom, prenom, pseudo, telephone, mail;
+    ItemClickListener itemClickListener;
 
-    public MyAdapter(Context c, ArrayList<Inscription_Modele> mList) {
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    public MyAdapter(Context c, ArrayList<Inscription_Modele> mList){
         this.c = c;
         this.mList = mList;
     }
+
 
     @NonNull
     @Override
@@ -47,36 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RecyclerVH> {
     @Override
     public void onBindViewHolder(@NonNull final MyAdapter.RecyclerVH holder, final int position) {
 
-        DatabaseReference mDatabase;
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Inscription_Modele connexion = dataSnapshot1.getValue(Inscription_Modele.class);
-
-                    if (connexion.getPseudo().equals("Dominique")){
-                        key = dataSnapshot1.getKey();
-                        nom = connexion.getNom();
-                        prenom = connexion.getPrenom();
-                        pseudo = connexion.getPseudo();
-                        telephone = connexion.getTelephone();
-                        mail = connexion.getMail();
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        /** FIrebase get key end*/
-
+        final Inscription_Modele modele = mList.get(position);
 
         holder.pseudo.setText(mList.get(position).getPseudo());
         holder.telephone.setText(mList.get(position).getTelephone());
@@ -84,12 +57,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RecyclerVH> {
             @Override
             public void onClick(View v) {
 
-                DatabaseReference updateData;
-
-                updateData = FirebaseDatabase.getInstance().getReference("Contacts").child(key).child(mList.get(position).getPseudo());
-                updateData.child("telephone").setValue(mList.get(position).getTelephone());
-                updateData.child("pseudo").setValue(mList.get(position).getPseudo());
-                updateData.child("profil").setValue(mList.get(position).getProfil());
+                if(itemClickListener != null){
+                    itemClickListener.onItemClick(modele);
+                }
             }
         });
     }
@@ -99,14 +69,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.RecyclerVH> {
         return mList.size();
     }
 
-    public class RecyclerVH extends RecyclerView.ViewHolder{
+    public class RecyclerVH extends RecyclerView.ViewHolder {
 
         CircleImageView profil;
         TextView telephone;
         TextView pseudo;
         ImageView addContactClick;
 
-        public RecyclerVH(@NonNull View itemView) {
+
+        public RecyclerVH(@NonNull final View itemView) {
             super(itemView);
 
             profil = (CircleImageView) itemView.findViewById(R.id.profilAddContactReycler);

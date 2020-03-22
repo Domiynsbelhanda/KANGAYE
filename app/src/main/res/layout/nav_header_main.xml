@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     android:gravity="center"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -24,7 +24,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/profil"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:id="@+id/headerProfil"/>
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
@@ -37,13 +38,15 @@
             android:layout_height="wrap_content"
             android:text="BELHANDA"
             android:textColor="@android:color/white"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:id="@+id/headerPseudo"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dominique Youness"
             android:textColor="@android:color/white"
-            android:textStyle="italic"/>
+            android:textStyle="italic"
+            android:id="@+id/headerNom"/>
 
     </LinearLayout>
 

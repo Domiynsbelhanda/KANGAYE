@@ -1,4 +1,4 @@
-package cd.belhanda.kangaye;
+package cd.belhanda.kangaye.Authentification;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -6,6 +6,8 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import cd.belhanda.kangaye.R;
 
 public class Authentification extends AppCompatActivity {
 

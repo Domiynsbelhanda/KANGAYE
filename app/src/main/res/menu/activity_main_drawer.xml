@@ -7,7 +7,8 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Accueil" />
+            android:title="Accueil"
+            android:iconTint="@color/color5"/>
         <item
             android:id="@+id/nav_profil"
             android:icon="@drawable/ic_account_circle_black_24dp"
@@ -29,6 +30,12 @@
             android:id="@+id/nav_carte"
             android:icon="@drawable/ic_navigation_black_24dp"
             android:title="Carte MAP's" />
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/nav_deconnecte"
+            android:title="Deconnexion" />
     </group>
 
 </menu>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:background="@color/colorPrimary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VOUS AVEZ RECU"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:textSize="22dp"
+                android:paddingBottom="20dp"
+                android:id="@+id/vousavezrecu"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/linearcontaint"
+                app:layout_constraintTop_toBottomOf="@id/vousavezrecu">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/profil"
+                    android:id="@+id/profildetailsos"/>
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="De la part de : "
+                    android:textSize="20dp"
+                    android:id="@+id/pseudocontainer"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/viewoklm"
+                app:layout_constraintTop_toBottomOf="@id/linearcontaint"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date et Heure"
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textAlignment="center"
+                android:id="@+id/DateAffichageok"
+                app:layout_constraintTop_toBottomOf="@id/viewoklm"/>
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/viewoklm2"
+                app:layout_constraintTop_toBottomOf="@+id/DateAffichageok"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Distance"
+                android:textColor="@android:color/white"
+                android:textSize="15dp"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/viewoklm2"
+                android:id="@+id/distanceAffichage"/>
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/viewoklm3"
+                app:layout_constraintTop_toBottomOf="@+id/distanceAffichage"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Appeler son MOBILE"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:id="@+id/btnAppelerSonmobile"
+                app:layout_constraintTop_toBottomOf="@id/viewoklm3"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GEOLOCALISATION"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@id/btnAppelerSonmobile"
+                android:id="@+id/btnGeolocalisation"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FERMER"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@id/btnGeolocalisation"
+                android:id="@+id/btncloseDialog"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</RelativeLayout>

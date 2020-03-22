@@ -15,4 +15,5 @@
     <string name="menu_send">Send</string>
     <string name="assistance">DEMANDE D\'ASSISTANCE</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps_using">Map</string>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    tools:context=".Connexion"
+    tools:context=".Authentification.Connexion"
     android:gravity="center">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -24,14 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="30dp"
+            app:cardBackgroundColor="@color/colorPrimaryDark">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pseudonyme"
             android:maxLines="1"
-            android:textColorHint="@android:color/black"
+            android:textColorHint="@android:color/white"
             android:id="@+id/edit_user_connexion"
             android:inputType="text"/>
         </androidx.cardview.widget.CardView>
@@ -40,33 +40,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="30dp"
+            app:cardBackgroundColor="@color/colorPrimaryDark">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mot de passe"
                 android:maxLines="1"
-                android:textColorHint="@android:color/black"
+                android:textColorHint="@android:color/white"
                 android:id="@+id/edit_password_connexion"
                 android:inputType="textPassword"/>
 
         </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Notification"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="30dp"
-            android:id="@+id/notification_connexion"
-            android:visibility="gone"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp"
             android:id="@+id/btn_connexion"
+            android:clickable="true"
             app:cardCornerRadius="5dp"
             android:layout_marginBottom="10dp">
             <TextView

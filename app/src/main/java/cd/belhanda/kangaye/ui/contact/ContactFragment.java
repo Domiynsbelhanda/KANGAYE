@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,25 +26,31 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import cd.belhanda.kangaye.Adapter.AddClickListener;
+import cd.belhanda.kangaye.Adapter.ItemClickListener;
 import cd.belhanda.kangaye.Adapter.MyAdapter;
 import cd.belhanda.kangaye.Adapter.MyAdapterAffichage;
-import cd.belhanda.kangaye.Modele.Contact;
 import cd.belhanda.kangaye.Modele.Inscription_Modele;
 import cd.belhanda.kangaye.R;
 
-public class ContactFragment extends Fragment{
+public class ContactFragment extends Fragment implements ItemClickListener, AddClickListener {
 
     private ContactViewModel contactViewModel;
 
-    private CardView cardViewAddContact;
     private Button btnAddContact, btnDeleteContact;
     private EditText editAddContact;
     RecyclerView recyclerViewAddContact, recyclerContact;
     ArrayList<Inscription_Modele> mList = new ArrayList<>();
     ArrayList<Inscription_Modele> mListe = new ArrayList<>();
-    private String key, nom, prenom, pseudo, telephone, mail;
+    private String key, pseudo;
+
+    MyAdapter adapter;
+    MyAdapterAffichage adaptere;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,26 +64,48 @@ public class ContactFragment extends Fragment{
             }
         });
 
-        key = getArguments().getString("key");
-        nom = getArguments().getString("nom");
-        prenom = getArguments().getString("prenom");
-        pseudo = getArguments().getString("pseudo");
-        telephone = getArguments().getString("telephone");
-        mail = getArguments().getString("mail");
+        try {
+            FileInputStream inputStream = getActivity().openFileInput("Key.txt");
+            int value;
+            StringBuffer lu = new StringBuffer();
+            while((value = inputStream.read()) != -1){
+                lu.append((char)value);
+            }
+            key = lu.toString();
+            if(inputStream != null)
+                inputStream.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
-        cardViewAddContact = root.findViewById(R.id.cardViewAddContact);
-        cardViewAddContact.setVisibility(View.GONE);
+        try {
+            FileInputStream inputStream = getActivity().openFileInput("Users.txt");
+            int value;
+            StringBuffer lu = new StringBuffer();
+            while((value = inputStream.read()) != -1){
+                lu.append((char)value);
+            }
+            pseudo = lu.toString();
+            if(inputStream != null)
+                inputStream.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        recyclerContact = root.findViewById(R.id.recyclerDeleteContact);
+        recyclerViewAddContact = root.findViewById(R.id.recyclerAddContact);
 
         btnAddContact = root.findViewById(R.id.btnAddContact);
         btnAddContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardViewAddContact.setVisibility(View.VISIBLE);
-                btnAddContact.setVisibility(View.GONE);
+                editAddContact.setVisibility(View.VISIBLE);
+                recyclerViewAddContact.setVisibility(View.VISIBLE);
+
             }
         });
 
-        recyclerContact = root.findViewById(R.id.recyclerDeleteContact);
+
         recyclerContact.setVisibility(View.GONE);
         recyclerContact.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -96,23 +125,27 @@ public class ContactFragment extends Fragment{
                     Inscription_Modele n = dataSnapshot1.getValue(Inscription_Modele.class);
                     mListe.add(n);
                 }
-                recyclerContact.setAdapter(new MyAdapterAffichage(getActivity(), mListe));
+
+                recyclerContact.setAdapter(adaptere);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
 
+        adaptere = new MyAdapterAffichage(getActivity(), mListe);
+        adaptere.setAddClickListener(this);
+
         btnDeleteContact = root.findViewById(R.id.btnContactDelete);
         btnDeleteContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recyclerContact.setVisibility(View.VISIBLE);
+                editAddContact.setVisibility(View.GONE);
+                btnAddContact.setVisibility(View.GONE);
             }
         });
 
-
-        recyclerViewAddContact = root.findViewById(R.id.recyclerAddContact);
         recyclerViewAddContact.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         editAddContact = root.findViewById(R.id.editAddContact);
@@ -150,7 +183,7 @@ public class ContactFragment extends Fragment{
                                 mList.add(n);
                             }
                         }
-                        recyclerViewAddContact.setAdapter(new MyAdapter(getActivity(), mList));
+                        recyclerViewAddContact.setAdapter(adapter);
                     }
 
                     @Override
@@ -161,11 +194,33 @@ public class ContactFragment extends Fragment{
             }
         });
 
-
-
-
+        adapter = new MyAdapter(getActivity(), mList);
+        adapter.setItemClickListener(this);
 
         return root;
     }
 
+    @Override
+    public void onItemClick(Inscription_Modele inscription_modele) {
+
+        DatabaseReference updateData;
+        updateData = FirebaseDatabase.getInstance().getReference("Contacts").child(key);
+        updateData = updateData.child(inscription_modele.getPseudo());
+
+        updateData.child("telephone").setValue(inscription_modele.getTelephone());
+        updateData.child("pseudo").setValue(inscription_modele.getPseudo());
+        updateData.child("profil").setValue(inscription_modele.getProfil());
+
+        Toast.makeText(getActivity(), inscription_modele.getPseudo() + " a été ajouté", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDeleteClick(Inscription_Modele inscription_modele) {
+        DatabaseReference mDatabase;
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Contacts").child(key).child(inscription_modele.getPseudo());
+        mDatabase.removeValue();
+
+        Toast.makeText(getActivity(), inscription_modele.getPseudo() + " a été supprimé", Toast.LENGTH_LONG).show();
+    }
 }

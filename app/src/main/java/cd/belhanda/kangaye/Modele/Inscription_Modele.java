@@ -8,20 +8,19 @@ public class Inscription_Modele {
     private String mot_de_passe;
     private String profil;
     private String mail;
+    private double longitude;
+    private double latitude;
 
     public Inscription_Modele() {
     }
 
-    public Inscription_Modele(String nom, String prenom, String pseudo, String telephone, String mot_de_passe, String profil) {
-        this.nom = nom;
-        this.prenom = prenom;
+    public Inscription_Modele(String pseudo, String telephone, String profil) {
         this.pseudo = pseudo;
         this.telephone = telephone;
-        this.mot_de_passe = mot_de_passe;
         this.profil = profil;
     }
 
-    public Inscription_Modele(String nom, String prenom, String pseudo, String telephone, String mot_de_passe, String profil, String mail) {
+    public Inscription_Modele(String nom, String prenom, String pseudo, String telephone, String mot_de_passe, String profil, String mail, double longitude, double latitude) {
         this.nom = nom;
         this.prenom = prenom;
         this.pseudo = pseudo;
@@ -29,6 +28,37 @@ public class Inscription_Modele {
         this.mot_de_passe = mot_de_passe;
         this.profil = profil;
         this.mail = mail;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    public Inscription_Modele(String nom, String pseudo, String telephone, String mot_de_passe, String profil) {
+        this.nom = nom;
+        this.pseudo = pseudo;
+        this.telephone = telephone;
+        this.mot_de_passe = mot_de_passe;
+        this.profil = profil;
+    }
+
+    public Inscription_Modele(String pseudo, String mot_de_passe) {
+        this.pseudo = pseudo;
+        this.mot_de_passe = mot_de_passe;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public String getNom() {
@@ -86,4 +116,5 @@ public class Inscription_Modele {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
 }
