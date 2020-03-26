@@ -47,8 +47,11 @@ import com.squareup.picasso.Picasso;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,9 +104,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     String pseudoss, telephoness, profilss;
 
-    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    LocalDateTime dateTime = LocalDateTime.now();
-    DateTimeFormatter heureFormat= DateTimeFormatter.ofPattern("HH:mm");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
 
     private static final int SECOND_ACTIVIT = 0;
 
@@ -178,8 +180,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         ChoixSurCarte = viewLancer.findViewById(R.id.ChoixsurCarte);
         ChoixVotrePosition = viewLancer.findViewById(R.id.ChoixVotrePosition);
 
-        dateEnvoie.setHint(dateTime.format(dateFormat));
-        heureEnvoie.setHint(dateTime.format(heureFormat));
+        Date currentTime = Calendar.getInstance().getTime();
+        dateEnvoie.setHint(dateFormat.format(currentTime));
+        heureEnvoie.setHint(heureFormat.format(currentTime));
 
         dialog.setContentView(viewLancer);
 
@@ -274,11 +277,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 }
 
                 if(TextUtils.isEmpty(datesEnvoie)){
-                    datesEnvoie = dateTime.format(dateFormat);
+                    datesEnvoie = dateFormat.format(currentTime);
                 }
 
                 if(TextUtils.isEmpty(heuresEnvoie)){
-                    heuresEnvoie = dateTime.format(heureFormat);
+                    heuresEnvoie = heureFormat.format(currentTime);
                 }
 
                 if(ChoixVotrePosition.isChecked() == false && TextUtils.isEmpty(String.valueOf(Latitude))){
